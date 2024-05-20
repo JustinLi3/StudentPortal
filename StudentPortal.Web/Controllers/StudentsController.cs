@@ -74,6 +74,20 @@ namespace StudentPortal.Web.Controllers
 
       } 
       return RedirectToAction("List","Students"); //After saving changes, we are redirected back to the list
-    } 
+    }
+
+    [HttpPost] 
+    public async Task<IActionResult> Delete(Student viewModel)
+    {
+      var student = await dbContext.Students
+      .AsNoTracking()
+      .FirstOrDefaultAsync(x => x.Id == viewModel.Id); 
+      if (student != null)
+      {
+        dbContext.Students.Remove(viewModel);
+        await dbContext.SaveChangesAsync();
+      }
+      return RedirectToAction("List", "Students");
+    }
   }
 }
