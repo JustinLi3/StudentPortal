@@ -23,7 +23,7 @@
         <td>@student.Name</td>
         <td>@student.Email</td>
         <td>
-          <a>Edit</a>
+          <a class="btn btn-primary" asp-controller="Students" asp-action="Edit" asp-route-id="@student.Id">Edit</a>
         </td>
       </tr>
     }

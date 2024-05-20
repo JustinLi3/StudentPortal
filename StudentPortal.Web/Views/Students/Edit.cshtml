@@ -3,18 +3,25 @@
 *@
 @{
 } 
-@model StudentPortal.Web.Models.AddStudentViewModel  //Access properties in that model inside the html here, bind each to the model for our DB
-<!--^^Essentially binds the AddStudent model to this html View -->
 
-<h1>Add Student</h1> 
+@model StudentPortal.Web.Models.Entities.Student
 
+<h1>Edit Student</h1>
 
-<form method="post">  <!--Since everything is inside the form, especially the submit button, we should be able to access info in the Students -->
+@if (Model is null)
+{
+  <p>No Student was found wth this Id</p> 
+} 
+else{
+<form method="post">
+  <div class="mt-3">
+    <label class="form-label">Id</label>
+    <input type="text" class="form-control" asp-for="Id" readonly /> <!--Read only attribute to have id only read-->
+  </div>
   <div class="mt-3">
     <label class="form-label">Name</label>
-    <input type="text" class="form-control" asp-for="Name" /> <!--Link each input to the properties of the modelView-->
+    <input type="text" class="form-control" asp-for="Name" /> 
   </div>
-
   <div class="mt-3">
     <label class="form-label">Email</label>
     <input type="email" class="form-control" asp-for="Email" />
@@ -35,3 +42,4 @@
   </div>
 
 </form>
+}

@@ -49,5 +49,31 @@ namespace StudentPortal.Web.Controllers
       var students = await dbContext.Students.ToListAsync(); //storing the list as a variable model, now we must set it as a view 
       return View(students);
     }
+
+    [HttpGet] 
+    public async Task<IActionResult> Edit(Guid id)
+    {
+      var student = await dbContext.Students.FindAsync(id); //Find student of id  (You might get a junk id, false id, so we must check it again in the html)
+      
+      return View(student);
+
+    }
+
+    [HttpPost] 
+    public async Task<IActionResult> Edit(Student viewModel)
+    {
+      var student = await dbContext.Students.FindAsync(viewModel.Id);
+      if (student != null)
+      {
+        student.Name = viewModel.Name; 
+        student.Email = viewModel.Email; 
+        student.PhoneNum = viewModel.PhoneNum; 
+        student.Subscribed = viewModel.Subscribed;      
+        
+        await dbContext.SaveChangesAsync(); //does not add a new object, just overwrites old student
+
+      } 
+      return RedirectToAction("List","Students"); //After saving changes, we are redirected back to the list
+    } 
   }
 }
