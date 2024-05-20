@@ -13,8 +13,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("StudentPortal")));
 //After, go to NuGet package manager and type in 'Add-Migration "_Name of migration_"' 
-//In order to see our Db, we must type in 'Update=Database'
-
+//In order to see our Db, we must type in 'Update-Database', this looks for the migration files generated and then into our database (execute what has not been executed and sync up)
+//Now we will create a new controller (to handle requests related to the database) and a new view in order to allow us to display the database and have ui that allows users to interact with database
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
